@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>로또번호 추첨</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Stint+Ultra+Condensed&family=Space+Grotesk:wght@400;600;700&display=swap");
+
+    :root {
+      --bg: #0d0f1a;
+      --bg-2: #1a1f2e;
+      --accent: #f4b63a;
+      --accent-2: #5ad7ff;
+      --text: #f5f7ff;
+      --muted: #9aa3b2;
+      --card: #151a26;
+      --ring: #2a3552;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 20% 10%, #202a44 0%, transparent 60%),
+        radial-gradient(900px 700px at 90% 20%, #1b2a3a 0%, transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px 20px 64px;
+    }
+
+    .shell {
+      width: min(980px, 100%);
+      display: grid;
+      gap: 28px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+    }
+
+    .title {
+      font-family: "Stint Ultra Condensed", "Space Grotesk", sans-serif;
+      font-size: clamp(40px, 7vw, 76px);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      line-height: 0.9;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 360px;
+    }
+
+    .panel {
+      background: rgba(21, 26, 38, 0.86);
+      border: 1px solid var(--ring);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(8px);
+    }
+
+    .draw-area {
+      display: grid;
+      gap: 20px;
+    }
+
+    .numbers {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .ball {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ffffff, var(--accent));
+      color: #1a1a1a;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: clamp(18px, 3vw, 28px);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      box-shadow: inset 0 -6px 12px rgba(0, 0, 0, 0.25);
+      transform: translateY(6px) scale(0.96);
+      opacity: 0;
+      animation: pop 450ms ease forwards;
+    }
+
+    .ball.blue {
+      background: radial-gradient(circle at 30% 30%, #ffffff, var(--accent-2));
+    }
+
+    @keyframes pop {
+      to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    button {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 20px;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      color: #111;
+      background: var(--accent);
+      transition: transform 120ms ease, box-shadow 120ms ease;
+      box-shadow: 0 10px 20px rgba(244, 182, 58, 0.35);
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--ring);
+      box-shadow: none;
+    }
+
+    button:active {
+      transform: translateY(1px) scale(0.99);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .history {
+      display: grid;
+      gap: 12px;
+    }
+
+    .history-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--ring);
+      background: rgba(18, 22, 33, 0.6);
+      font-size: 14px;
+    }
+
+    .history-item span {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: right;
+    }
+
+    @media (max-width: 720px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .numbers {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .hint {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <div class="title">LOTTO DRAW</div>
+        <p class="subtitle">로또 6/45 번호를 즉석에서 추첨합니다. 버튼 한 번으로 새로운 조합을 생성하세요.</p>
+      </div>
+      <div class="hint">무작위 시드: <span id="seed">-</span></div>
+    </header>
+
+    <section class="panel draw-area">
+      <div class="numbers" id="numbers"></div>
+      <div class="controls">
+        <button id="draw">추첨하기</button>
+        <button id="reroll" class="secondary">다시 뽑기</button>
+        <button id="clear" class="secondary">기록 초기화</button>
+        <div class="meta">
+          <div>범위: 1-45</div>
+          <div>선택: 6개 번호</div>
+          <div>정렬: 오름차순</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel history">
+      <div class="title" style="font-size: clamp(26px, 4vw, 40px);">DRAW LOG</div>
+      <div id="history"></div>
+    </section>
+  </main>
+
+  <script>
+    const numbersEl = document.getElementById("numbers");
+    const historyEl = document.getElementById("history");
+    const seedEl = document.getElementById("seed");
+
+    function makeSeed() {
+      const now = new Date();
+      const seed = now.toISOString().replace(/[-:.TZ]/g, "").slice(0, 14);
+      seedEl.textContent = seed;
+      return seed;
+    }
+
+    function drawNumbers() {
+      const pool = Array.from({ length: 45 }, (_, i) => i + 1);
+      const picks = [];
+      while (picks.length < 6) {
+        const index = Math.floor(Math.random() * pool.length);
+        picks.push(pool.splice(index, 1)[0]);
+      }
+      return picks.sort((a, b) => a - b);
+    }
+
+    function renderNumbers(nums) {
+      numbersEl.innerHTML = "";
+      nums.forEach((num, idx) => {
+        const ball = document.createElement("div");
+        ball.className = "ball" + (idx % 2 === 1 ? " blue" : "");
+        ball.style.animationDelay = `${idx * 120}ms`;
+        ball.textContent = num;
+        numbersEl.appendChild(ball);
+      });
+    }
+
+    function addHistory(nums) {
+      const row = document.createElement("div");
+      row.className = "history-item";
+      const time = new Date().toLocaleTimeString("ko-KR", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      });
+      row.innerHTML = `
+        <span>${time}</span>
+        <div class="chip-row">
+          ${nums.map((n) => `<div class="chip">${n}</div>`).join("")}
+        </div>
+      `;
+      historyEl.prepend(row);
+    }
+
+    function doDraw() {
+      makeSeed();
+      const nums = drawNumbers();
+      renderNumbers(nums);
+      addHistory(nums);
+    }
+
+    document.getElementById("draw").addEventListener("click", doDraw);
+    document.getElementById("reroll").addEventListener("click", () => {
+      const nums = drawNumbers();
+      renderNumbers(nums);
+    });
+    document.getElementById("clear").addEventListener("click", () => {
+      historyEl.innerHTML = "";
+    });
+
+    doDraw();
+  </script>
+</body>
+</html>
