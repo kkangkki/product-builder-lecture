@@ -18,6 +18,17 @@
       --ring: #2a3552;
     }
 
+    body.light-mode {
+      --bg: #f5f7ff;
+      --bg-2: #e8eaf1;
+      --accent: #f4b63a;
+      --accent-2: #007bff;
+      --text: #0d0f1a;
+      --muted: #5a6372;
+      --card: #ffffff;
+      --ring: #d0d5e0;
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -33,6 +44,13 @@
       display: grid;
       place-items: center;
       padding: 32px 20px 64px;
+      transition: background-color 300ms ease, color 300ms ease;
+    }
+    
+    body.light-mode {
+      background: radial-gradient(1200px 800px at 20% 10%, #e0eaff 0%, transparent 60%),
+        radial-gradient(900px 700px at 90% 20%, #d8e0f0 0%, transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
     }
 
     .shell {
@@ -69,6 +87,12 @@
       padding: 28px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
       backdrop-filter: blur(8px);
+      transition: background 300ms ease, border-color 300ms ease;
+    }
+
+    body.light-mode .panel {
+        background: rgba(255, 255, 255, 0.7);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
     }
 
     .draw-area {
@@ -126,7 +150,7 @@
       cursor: pointer;
       color: #111;
       background: var(--accent);
-      transition: transform 120ms ease, box-shadow 120ms ease;
+      transition: transform 120ms ease, box-shadow 120ms ease, background 300ms ease;
       box-shadow: 0 10px 20px rgba(244, 182, 58, 0.35);
     }
 
@@ -135,6 +159,11 @@
       color: var(--text);
       border: 1px solid var(--ring);
       box-shadow: none;
+    }
+
+    body.light-mode button.secondary {
+        color: var(--text);
+        border-color: var(--ring);
     }
 
     button:active {
@@ -164,6 +193,11 @@
       border: 1px solid var(--ring);
       background: rgba(18, 22, 33, 0.6);
       font-size: 14px;
+      transition: background 300ms ease, border-color 300ms ease;
+    }
+    
+    body.light-mode .history-item {
+        background: rgba(255, 255, 255, 0.5);
     }
 
     .history-item span {
@@ -213,7 +247,10 @@
         <div class="title">LOTTO DRAW</div>
         <p class="subtitle">로또 6/45 번호를 즉석에서 추첨합니다. 버튼 한 번으로 새로운 조합을 생성하세요.</p>
       </div>
-      <div class="hint">무작위 시드: <span id="seed">-</span></div>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button id="theme-toggle" class="secondary" style="padding: 12px; display: grid; place-items: center;"></button>
+        <div class="hint">무작위 시드: <span id="seed">-</span></div>
+      </div>
     </header>
 
     <section class="panel draw-area">
@@ -303,6 +340,54 @@
     });
 
     doDraw();
+  </script>
+  <script>
+    const themeToggle = document.getElementById("theme-toggle");
+    const body = document.body;
+
+    const moonIcon = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+    `;
+
+    const sunIcon = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+    `;
+
+    function applyTheme(theme) {
+      if (theme === 'light') {
+        body.classList.add('light-mode');
+        themeToggle.innerHTML = moonIcon;
+      } else {
+        body.classList.remove('light-mode');
+        themeToggle.innerHTML = sunIcon;
+      }
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isLight = body.classList.contains('light-mode');
+      if (isLight) {
+        localStorage.setItem('theme', 'dark');
+        applyTheme('dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+        applyTheme('light');
+      }
+    });
+
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(savedTheme);
   </script>
 </body>
 </html>
