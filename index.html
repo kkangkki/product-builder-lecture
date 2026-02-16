@@ -298,6 +298,14 @@
       font-weight: 600;
     }
 
+    .disqus {
+      min-height: 240px;
+    }
+
+    .disqus #disqus_thread {
+      padding: 8px 4px 4px;
+    }
+
     @media (max-width: 720px) {
       header {
         flex-direction: column;
@@ -405,6 +413,14 @@
           <div>응답 안내 메일로 접수 확인을 보내드립니다.</div>
         </div>
       </form>
+    </section>
+
+    <section class="panel disqus">
+      <div>
+        <h2 class="form-title">댓글</h2>
+        <p class="form-subtitle">의견이나 개선 요청을 남겨주세요.</p>
+      </div>
+      <div id="disqus_thread"></div>
     </section>
   </main>
 
@@ -524,5 +540,14 @@
     const savedTheme = localStorage.getItem("theme") || "dark";
     applyTheme(savedTheme);
   </script>
+  <script>
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "https://product-builder-borkuxr1xg.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </body>
 </html>
