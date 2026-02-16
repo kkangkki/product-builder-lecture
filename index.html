@@ -3,30 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>로또번호 추첨</title>
+  <title>제휴 문의</title>
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Stint+Ultra+Condensed&family=Space+Grotesk:wght@400;600;700&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Manrope:wght@400;600&display=swap");
 
     :root {
-      --bg: #0d0f1a;
-      --bg-2: #1a1f2e;
-      --accent: #f4b63a;
-      --accent-2: #5ad7ff;
-      --text: #f5f7ff;
-      --muted: #9aa3b2;
-      --card: #151a26;
-      --ring: #2a3552;
-    }
-
-    body.light-mode {
-      --bg: #f5f7ff;
-      --bg-2: #e8eaf1;
-      --accent: #f4b63a;
-      --accent-2: #007bff;
-      --text: #0d0f1a;
-      --muted: #5a6372;
+      --bg: #f5efe6;
+      --bg-2: #fdf9f3;
+      --ink: #1b1b1b;
+      --muted: #6c6c6c;
+      --accent: #f05a28;
+      --accent-2: #0b8c7a;
       --card: #ffffff;
-      --ring: #d0d5e0;
+      --ring: #e5ddd2;
     }
 
     * {
@@ -35,105 +24,105 @@
 
     body {
       margin: 0;
-      font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
-      color: var(--text);
-      background: radial-gradient(1200px 800px at 20% 10%, #202a44 0%, transparent 60%),
-        radial-gradient(900px 700px at 90% 20%, #1b2a3a 0%, transparent 55%),
+      font-family: "Manrope", system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(900px 520px at 10% 20%, rgba(240, 90, 40, 0.08), transparent 60%),
+        radial-gradient(900px 620px at 90% 10%, rgba(11, 140, 122, 0.08), transparent 60%),
         linear-gradient(180deg, var(--bg), var(--bg-2));
       min-height: 100vh;
       display: grid;
       place-items: center;
-      padding: 32px 20px 64px;
-      transition: background-color 300ms ease, color 300ms ease;
-    }
-    
-    body.light-mode {
-      background: radial-gradient(1200px 800px at 20% 10%, #e0eaff 0%, transparent 60%),
-        radial-gradient(900px 700px at 90% 20%, #d8e0f0 0%, transparent 55%),
-        linear-gradient(180deg, var(--bg), var(--bg-2));
+      padding: 40px 20px 64px;
     }
 
-    .shell {
-      width: min(980px, 100%);
+    .wrap {
+      width: min(880px, 100%);
       display: grid;
       gap: 28px;
     }
 
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      font-weight: 600;
     }
 
     .title {
-      font-family: "Stint Ultra Condensed", "Space Grotesk", sans-serif;
-      font-size: clamp(40px, 7vw, 76px);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      line-height: 0.9;
+      font-family: "Fraunces", serif;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.05;
+      margin: 0;
     }
 
     .subtitle {
       color: var(--muted);
       font-size: 16px;
-      max-width: 360px;
+      max-width: 520px;
     }
 
     .panel {
-      background: rgba(21, 26, 38, 0.86);
+      background: var(--card);
       border: 1px solid var(--ring);
       border-radius: 24px;
       padding: 28px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(8px);
-      transition: background 300ms ease, border-color 300ms ease;
-    }
-
-    body.light-mode .panel {
-        background: rgba(255, 255, 255, 0.7);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-    }
-
-    .draw-area {
+      box-shadow: 0 18px 40px rgba(43, 34, 24, 0.12);
       display: grid;
       gap: 20px;
     }
 
-    .numbers {
+    .grid {
       display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
     }
 
-    .ball {
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #ffffff, var(--accent));
-      color: #1a1a1a;
+    label {
       display: grid;
-      place-items: center;
-      font-weight: 700;
-      font-size: clamp(18px, 3vw, 28px);
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      box-shadow: inset 0 -6px 12px rgba(0, 0, 0, 0.25);
-      transform: translateY(6px) scale(0.96);
-      opacity: 0;
-      animation: pop 450ms ease forwards;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
     }
 
-    .ball.blue {
-      background: radial-gradient(circle at 30% 30%, #ffffff, var(--accent-2));
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--ring);
+      padding: 12px 14px;
+      font-size: 15px;
+      font-family: inherit;
+      background: #fff;
+      color: var(--ink);
+      transition: border-color 150ms ease, box-shadow 150ms ease;
     }
 
-    @keyframes pop {
-      to {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(240, 90, 40, 0.15);
     }
 
-    .controls {
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
@@ -144,250 +133,119 @@
       appearance: none;
       border: none;
       border-radius: 999px;
-      padding: 12px 20px;
-      font-weight: 600;
+      padding: 12px 22px;
+      font-weight: 700;
       font-size: 15px;
       cursor: pointer;
-      color: #111;
+      color: #fff;
       background: var(--accent);
-      transition: transform 120ms ease, box-shadow 120ms ease, background 300ms ease;
-      box-shadow: 0 10px 20px rgba(244, 182, 58, 0.35);
-    }
-
-    button.secondary {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--ring);
-      box-shadow: none;
-    }
-
-    body.light-mode button.secondary {
-        color: var(--text);
-        border-color: var(--ring);
+      box-shadow: 0 12px 24px rgba(240, 90, 40, 0.25);
+      transition: transform 120ms ease, box-shadow 120ms ease;
     }
 
     button:active {
       transform: translateY(1px) scale(0.99);
     }
 
-    .meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .history {
-      display: grid;
-      gap: 12px;
-    }
-
-    .history-item {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 12px;
-      align-items: center;
-      padding: 12px 14px;
-      border-radius: 16px;
-      border: 1px solid var(--ring);
-      background: rgba(18, 22, 33, 0.6);
-      font-size: 14px;
-      transition: background 300ms ease, border-color 300ms ease;
-    }
-    
-    body.light-mode .history-item {
-        background: rgba(255, 255, 255, 0.5);
-    }
-
-    .history-item span {
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .chip {
-      border-radius: 999px;
-      padding: 6px 10px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
     .hint {
       color: var(--muted);
       font-size: 13px;
-      text-align: right;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 6px 12px;
+      background: rgba(11, 140, 122, 0.08);
+      color: var(--accent-2);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .meta {
+      display: grid;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .meta strong {
+      color: var(--ink);
     }
 
     @media (max-width: 720px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
+      .grid {
+        grid-template-columns: 1fr;
       }
 
-      .numbers {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .hint {
-        text-align: left;
+      .panel {
+        padding: 22px;
       }
     }
   </style>
 </head>
 <body>
-  <main class="shell">
+  <main class="wrap">
     <header>
-      <div>
-        <div class="title">LOTTO DRAW</div>
-        <p class="subtitle">로또 6/45 번호를 즉석에서 추첨합니다. 버튼 한 번으로 새로운 조합을 생성하세요.</p>
-      </div>
-      <div style="display: flex; align-items: center; gap: 16px;">
-        <button id="theme-toggle" class="secondary" style="padding: 12px; display: grid; place-items: center;"></button>
-        <div class="hint">무작위 시드: <span id="seed">-</span></div>
-      </div>
+      <span class="eyebrow">Partnership</span>
+      <h1 class="title">제휴 문의</h1>
+      <p class="subtitle">브랜드 협업, 공동 프로모션, 리셀러 파트너십 등 제휴 제안을 남겨주세요. 영업일 기준 2~3일 내 회신드립니다.</p>
     </header>
 
-    <section class="panel draw-area">
-      <div class="numbers" id="numbers"></div>
-      <div class="controls">
-        <button id="draw">추첨하기</button>
-        <button id="reroll" class="secondary">다시 뽑기</button>
-        <button id="clear" class="secondary">기록 초기화</button>
-        <div class="meta">
-          <div>범위: 1-45</div>
-          <div>선택: 6개 번호</div>
-          <div>정렬: 오름차순</div>
+    <section class="panel">
+      <form action="https://formspree.io/f/mwvlwzrb" method="POST">
+        <div class="grid">
+          <label>
+            담당자 이름
+            <input type="text" name="name" placeholder="홍길동" required />
+          </label>
+          <label>
+            회사명
+            <input type="text" name="company" placeholder="회사 또는 브랜드명" required />
+          </label>
+          <label>
+            이메일
+            <input type="email" name="email" placeholder="name@company.com" required />
+          </label>
+          <label>
+            연락처
+            <input type="tel" name="phone" placeholder="010-0000-0000" />
+          </label>
+          <label>
+            제휴 유형
+            <select name="partnership_type" required>
+              <option value="" disabled selected>선택해 주세요</option>
+              <option>브랜드 협업</option>
+              <option>공동 프로모션</option>
+              <option>리셀러/유통</option>
+              <option>콘텐츠/미디어</option>
+              <option>기타</option>
+            </select>
+          </label>
+          <label>
+            예상 일정
+            <input type="text" name="timeline" placeholder="예: 2026년 3월 중" />
+          </label>
         </div>
-      </div>
-    </section>
 
-    <section class="panel history">
-      <div class="title" style="font-size: clamp(26px, 4vw, 40px);">DRAW LOG</div>
-      <div id="history"></div>
+        <label>
+          제안 내용
+          <textarea name="message" placeholder="제휴 목표, 기대 효과, 필요한 리소스 등을 간단히 적어주세요." required></textarea>
+        </label>
+
+        <div class="actions">
+          <button type="submit">문의 보내기</button>
+          <span class="hint">제출 시 개인정보 처리방침에 동의한 것으로 간주합니다.</span>
+        </div>
+
+        <div class="meta">
+          <span class="pill">Formspree 연동 완료</span>
+          <div><strong>응답 안내</strong> 메일로 접수 확인을 보내드립니다.</div>
+        </div>
+      </form>
     </section>
   </main>
-
-  <script>
-    const numbersEl = document.getElementById("numbers");
-    const historyEl = document.getElementById("history");
-    const seedEl = document.getElementById("seed");
-
-    function makeSeed() {
-      const now = new Date();
-      const seed = now.toISOString().replace(/[-:.TZ]/g, "").slice(0, 14);
-      seedEl.textContent = seed;
-      return seed;
-    }
-
-    function drawNumbers() {
-      const pool = Array.from({ length: 45 }, (_, i) => i + 1);
-      const picks = [];
-      while (picks.length < 6) {
-        const index = Math.floor(Math.random() * pool.length);
-        picks.push(pool.splice(index, 1)[0]);
-      }
-      return picks.sort((a, b) => a - b);
-    }
-
-    function renderNumbers(nums) {
-      numbersEl.innerHTML = "";
-      nums.forEach((num, idx) => {
-        const ball = document.createElement("div");
-        ball.className = "ball" + (idx % 2 === 1 ? " blue" : "");
-        ball.style.animationDelay = `${idx * 120}ms`;
-        ball.textContent = num;
-        numbersEl.appendChild(ball);
-      });
-    }
-
-    function addHistory(nums) {
-      const row = document.createElement("div");
-      row.className = "history-item";
-      const time = new Date().toLocaleTimeString("ko-KR", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit"
-      });
-      row.innerHTML = `
-        <span>${time}</span>
-        <div class="chip-row">
-          ${nums.map((n) => `<div class="chip">${n}</div>`).join("")}
-        </div>
-      `;
-      historyEl.prepend(row);
-    }
-
-    function doDraw() {
-      makeSeed();
-      const nums = drawNumbers();
-      renderNumbers(nums);
-      addHistory(nums);
-    }
-
-    document.getElementById("draw").addEventListener("click", doDraw);
-    document.getElementById("reroll").addEventListener("click", () => {
-      const nums = drawNumbers();
-      renderNumbers(nums);
-    });
-    document.getElementById("clear").addEventListener("click", () => {
-      historyEl.innerHTML = "";
-    });
-
-    doDraw();
-  </script>
-  <script>
-    const themeToggle = document.getElementById("theme-toggle");
-    const body = document.body;
-
-    const moonIcon = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-    </svg>
-    `;
-
-    const sunIcon = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="5"></circle>
-      <line x1="12" y1="1" x2="12" y2="3"></line>
-      <line x1="12" y1="21" x2="12" y2="23"></line>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-      <line x1="1" y1="12" x2="3" y2="12"></line>
-      <line x1="21" y1="12" x2="23" y2="12"></line>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-    </svg>
-    `;
-
-    function applyTheme(theme) {
-      if (theme === 'light') {
-        body.classList.add('light-mode');
-        themeToggle.innerHTML = moonIcon;
-      } else {
-        body.classList.remove('light-mode');
-        themeToggle.innerHTML = sunIcon;
-      }
-    }
-
-    themeToggle.addEventListener('click', () => {
-      const isLight = body.classList.contains('light-mode');
-      if (isLight) {
-        localStorage.setItem('theme', 'dark');
-        applyTheme('dark');
-      } else {
-        localStorage.setItem('theme', 'light');
-        applyTheme('light');
-      }
-    });
-
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    applyTheme(savedTheme);
-  </script>
 </body>
 </html>
