@@ -4,552 +4,97 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="google-adsense-account" content="ca-pub-1566573975205768" />
+  <meta name="description" content="로또 확률, 예산 관리, 통계 해석을 다루는 교육형 콘텐츠 사이트. 과장 없는 데이터 기반 가이드를 제공합니다." />
+  <meta name="keywords" content="로또 확률, 로또 통계, 복권 예산, 로또 가이드" />
+  <meta property="og:title" content="로또 데이터 랩 | 확률과 통계를 이해하는 가이드" />
+  <meta property="og:description" content="당첨 보장이 아닌, 확률·예산·행동 원칙을 배우는 고품질 정보형 사이트" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com/" />
+  <link rel="canonical" href="https://example.com/" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <title>로또 데이터 랩 | 확률과 통계를 이해하는 가이드</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1566573975205768" crossorigin="anonymous"></script>
-  <title>로또번호 추첨 | 제휴 문의</title>
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Stint+Ultra+Condensed&family=Space+Grotesk:wght@400;600;700&display=swap");
-
-    :root {
-      --bg: #0d0f1a;
-      --bg-2: #1a1f2e;
-      --accent: #f4b63a;
-      --accent-2: #5ad7ff;
-      --text: #f5f7ff;
-      --muted: #9aa3b2;
-      --card: #151a26;
-      --ring: #2a3552;
-      --input: #0f1422;
-    }
-
-    body.light-mode {
-      --bg: #f5f7ff;
-      --bg-2: #e8eaf1;
-      --accent: #f4b63a;
-      --accent-2: #007bff;
-      --text: #0d0f1a;
-      --muted: #5a6372;
-      --card: #ffffff;
-      --ring: #d0d5e0;
-      --input: #f7f8fb;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
-      color: var(--text);
-      background: radial-gradient(1200px 800px at 20% 10%, #202a44 0%, transparent 60%),
-        radial-gradient(900px 700px at 90% 20%, #1b2a3a 0%, transparent 55%),
-        linear-gradient(180deg, var(--bg), var(--bg-2));
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 32px 20px 64px;
-      transition: background-color 300ms ease, color 300ms ease;
-    }
-
-    body.light-mode {
-      background: radial-gradient(1200px 800px at 20% 10%, #e0eaff 0%, transparent 60%),
-        radial-gradient(900px 700px at 90% 20%, #d8e0f0 0%, transparent 55%),
-        linear-gradient(180deg, var(--bg), var(--bg-2));
-    }
-
-    .shell {
-      width: min(980px, 100%);
-      display: grid;
-      gap: 28px;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 16px;
-    }
-
-    .title {
-      font-family: "Stint Ultra Condensed", "Space Grotesk", sans-serif;
-      font-size: clamp(40px, 7vw, 76px);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      line-height: 0.9;
-    }
-
-    .subtitle {
-      color: var(--muted);
-      font-size: 16px;
-      max-width: 360px;
-    }
-
-    .panel {
-      background: rgba(21, 26, 38, 0.86);
-      border: 1px solid var(--ring);
-      border-radius: 24px;
-      padding: 28px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(8px);
-      transition: background 300ms ease, border-color 300ms ease;
-    }
-
-    body.light-mode .panel {
-      background: rgba(255, 255, 255, 0.7);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-    }
-
-    .draw-area {
-      display: grid;
-      gap: 20px;
-    }
-
-    .numbers {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .ball {
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #ffffff, var(--accent));
-      color: #1a1a1a;
-      display: grid;
-      place-items: center;
-      font-weight: 700;
-      font-size: clamp(18px, 3vw, 28px);
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      box-shadow: inset 0 -6px 12px rgba(0, 0, 0, 0.25);
-      transform: translateY(6px) scale(0.96);
-      opacity: 0;
-      animation: pop 450ms ease forwards;
-    }
-
-    .ball.blue {
-      background: radial-gradient(circle at 30% 30%, #ffffff, var(--accent-2));
-    }
-
-    @keyframes pop {
-      to {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-    }
-
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-    }
-
-    button {
-      appearance: none;
-      border: none;
-      border-radius: 999px;
-      padding: 12px 20px;
-      font-weight: 600;
-      font-size: 15px;
-      cursor: pointer;
-      color: #111;
-      background: var(--accent);
-      transition: transform 120ms ease, box-shadow 120ms ease, background 300ms ease;
-      box-shadow: 0 10px 20px rgba(244, 182, 58, 0.35);
-    }
-
-    button.secondary {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--ring);
-      box-shadow: none;
-    }
-
-    body.light-mode button.secondary {
-      color: var(--text);
-      border-color: var(--ring);
-    }
-
-    button:active {
-      transform: translateY(1px) scale(0.99);
-    }
-
-    .meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .history {
-      display: grid;
-      gap: 12px;
-    }
-
-    .history-item {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 12px;
-      align-items: center;
-      padding: 12px 14px;
-      border-radius: 16px;
-      border: 1px solid var(--ring);
-      background: rgba(18, 22, 33, 0.6);
-      font-size: 14px;
-      transition: background 300ms ease, border-color 300ms ease;
-    }
-
-    body.light-mode .history-item {
-      background: rgba(255, 255, 255, 0.5);
-    }
-
-    .history-item span {
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .chip {
-      border-radius: 999px;
-      padding: 6px 10px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .hint {
-      color: var(--muted);
-      font-size: 13px;
-      text-align: right;
-    }
-
-    .form-title {
-      font-size: clamp(26px, 4vw, 40px);
-      margin: 0;
-    }
-
-    .form-subtitle {
-      color: var(--muted);
-      font-size: 14px;
-      max-width: 520px;
-      margin: 6px 0 0;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    label {
-      display: grid;
-      gap: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    input,
-    select,
-    textarea {
-      width: 100%;
-      border-radius: 14px;
-      border: 1px solid var(--ring);
-      padding: 12px 14px;
-      font-size: 15px;
-      font-family: inherit;
-      background: var(--input);
-      color: var(--text);
-      transition: border-color 150ms ease, box-shadow 150ms ease;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(244, 182, 58, 0.18);
-    }
-
-    textarea {
-      min-height: 140px;
-      resize: vertical;
-    }
-
-    .form-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border-radius: 999px;
-      padding: 6px 12px;
-      background: rgba(90, 215, 255, 0.12);
-      color: var(--accent-2);
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .disqus {
-      min-height: 240px;
-    }
-
-    .disqus #disqus_thread {
-      padding: 8px 4px 4px;
-    }
-
-    @media (max-width: 720px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .numbers {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .hint {
-        text-align: left;
-      }
-
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
 </head>
 <body>
-  <main class="shell">
-    <header>
-      <div>
-        <div class="title">LOTTO DRAW</div>
-        <p class="subtitle">로또 6/45 번호를 즉석에서 추첨합니다. 버튼 한 번으로 새로운 조합을 생성하세요.</p>
-      </div>
-      <div style="display: flex; align-items: center; gap: 16px;">
-        <button id="theme-toggle" class="secondary" style="padding: 12px; display: grid; place-items: center;"></button>
-        <div class="hint">무작위 시드: <span id="seed">-</span></div>
-      </div>
-    </header>
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a class="brand" href="index.html">로또 데이터 랩</a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="index.html">홈</a>
+        <a href="guide-odds.html">확률 가이드</a>
+        <a href="guide-budget.html">예산 가이드</a>
+        <a href="guide-myths.html">오해 바로잡기</a>
+        <a href="about.html">소개</a>
+        <a href="contact.html">문의</a>
+      </nav>
+    </div>
+  </header>
 
-    <section class="panel draw-area">
-      <div class="numbers" id="numbers"></div>
-      <div class="controls">
-        <button id="draw">추첨하기</button>
-        <button id="reroll" class="secondary">다시 뽑기</button>
-        <button id="clear" class="secondary">기록 초기화</button>
-        <div class="meta">
-          <div>범위: 1-45</div>
-          <div>선택: 6개 번호</div>
-          <div>정렬: 오름차순</div>
-        </div>
+  <main class="container">
+    <section class="hero">
+      <h1>당첨 보장 대신, 확률을 이해하는 사람을 위한 로또 학습 사이트</h1>
+      <p>
+        이 사이트는 "번호 추천"이 아니라 "판단 기준"을 제공합니다. 모든 글은 기대값, 분산, 행동경제학 관점에서 작성하며,
+        과장 광고나 오해를 유도하는 표현을 사용하지 않습니다.
+      </p>
+      <div class="badges" aria-label="사이트 원칙">
+        <span class="badge">원문 작성 콘텐츠</span>
+        <span class="badge">정기 업데이트</span>
+        <span class="badge">모바일 최적화</span>
+        <span class="badge">명확한 정책 페이지</span>
       </div>
     </section>
 
-    <section class="panel history">
-      <div class="title" style="font-size: clamp(26px, 4vw, 40px);">DRAW LOG</div>
-      <div id="history"></div>
+    <section class="section">
+      <h2>핵심 가이드</h2>
+      <div class="grid cards">
+        <article class="card">
+          <h3><a href="guide-odds.html">로또 확률을 숫자로 이해하기</a></h3>
+          <p>조합 수와 기대값을 실제 수치로 풀어 설명하고, 흔한 계산 오류를 예시와 함께 바로잡습니다.</p>
+        </article>
+        <article class="card">
+          <h3><a href="guide-budget.html">지속 가능한 구매 예산 설계</a></h3>
+          <p>생활비와 분리된 오락 예산 프레임을 제시해, 단기 감정에 흔들리지 않는 구매 루틴을 만듭니다.</p>
+        </article>
+        <article class="card">
+          <h3><a href="guide-myths.html">통계 오해 7가지 점검표</a></h3>
+          <p>핫넘버, 콜드넘버, 회차 패턴 착각처럼 자주 반복되는 오해를 데이터 해석 관점에서 정리합니다.</p>
+        </article>
+      </div>
     </section>
 
-    <section class="panel">
-      <div>
-        <h2 class="form-title">제휴 문의</h2>
-        <p class="form-subtitle">브랜드 협업, 공동 프로모션, 리셀러 파트너십 등 제휴 제안을 남겨주세요. 영업일 기준 2~3일 내 회신드립니다.</p>
-      </div>
-      <form action="https://formspree.io/f/mwvlwzrb" method="POST">
-        <div class="form-grid">
-          <label>
-            담당자 이름
-            <input type="text" name="name" placeholder="홍길동" required />
-          </label>
-          <label>
-            회사명
-            <input type="text" name="company" placeholder="회사 또는 브랜드명" required />
-          </label>
-          <label>
-            이메일
-            <input type="email" name="email" placeholder="name@company.com" required />
-          </label>
-          <label>
-            연락처
-            <input type="tel" name="phone" placeholder="010-0000-0000" />
-          </label>
-          <label>
-            제휴 유형
-            <select name="partnership_type" required>
-              <option value="" disabled selected>선택해 주세요</option>
-              <option>브랜드 협업</option>
-              <option>공동 프로모션</option>
-              <option>리셀러/유통</option>
-              <option>콘텐츠/미디어</option>
-              <option>기타</option>
-            </select>
-          </label>
-          <label>
-            예상 일정
-            <input type="text" name="timeline" placeholder="예: 2026년 3월 중" />
-          </label>
-        </div>
+    <section class="section two-col">
+      <article class="article">
+        <h2>왜 이런 구성이 AdSense 승인 가능성에 유리한가</h2>
+        <p>
+          AdSense 운영팀이 반복해서 강조하는 핵심은 "사용자에게 가치 있는 페이지"입니다. 사이트가 단순 기능 한 개만 제공하거나,
+          자동 생성에 가까운 얇은 페이지만 있으면 승인 과정에서 불리할 수 있습니다. 그래서 이 사이트는 정보형 본문, 소개/문의/정책,
+          내부 링크 구조를 함께 갖추도록 설계했습니다.
+        </p>
+        <p>
+          또한 각 페이지는 독립적으로 이해 가능한 텍스트를 포함하고, 광고 코드 외에 과도한 외부 스크립트를 사용하지 않도록 최소화했습니다.
+          검색엔진 크롤링을 위한 `robots.txt`, `sitemap.xml`도 함께 제공해 색인 안정성을 높였습니다.
+        </p>
+        <p class="notice">
+          중요: 어떤 사이트도 "무조건 승인"은 보장할 수 없습니다. 다만 정책 위반 가능성을 줄이고, 품질 신호를 강화하는 구조로 구축할 수는 있습니다.
+        </p>
+      </article>
 
-        <label>
-          제안 내용
-          <textarea name="message" placeholder="제휴 목표, 기대 효과, 필요한 리소스 등을 간단히 적어주세요." required></textarea>
-        </label>
-
-        <div class="form-actions">
-          <button type="submit">문의 보내기</button>
-          <span class="hint">제출 시 개인정보 처리방침에 동의한 것으로 간주합니다.</span>
-        </div>
-
-        <div class="meta" style="margin-top: 12px;">
-          <span class="badge">Formspree 연동 완료</span>
-          <div>응답 안내 메일로 접수 확인을 보내드립니다.</div>
-        </div>
-      </form>
-    </section>
-
-    <section class="panel disqus">
-      <div>
-        <h2 class="form-title">댓글</h2>
-        <p class="form-subtitle">의견이나 개선 요청을 남겨주세요.</p>
-      </div>
-      <div id="disqus_thread"></div>
+      <aside class="card">
+        <h3>운영 정보</h3>
+        <p>콘텐츠 유형: 정보형 교육 콘텐츠</p>
+        <p>최종 업데이트: 2026-02-17</p>
+        <p>광고 정책: 본문 중심, 과도한 광고 배치 지양</p>
+        <a class="cta" href="editorial-policy.html">편집 정책 보기</a>
+      </aside>
     </section>
   </main>
 
-  <script>
-    const numbersEl = document.getElementById("numbers");
-    const historyEl = document.getElementById("history");
-    const seedEl = document.getElementById("seed");
-
-    function makeSeed() {
-      const now = new Date();
-      const seed = now.toISOString().replace(/[-:.TZ]/g, "").slice(0, 14);
-      seedEl.textContent = seed;
-      return seed;
-    }
-
-    function drawNumbers() {
-      const pool = Array.from({ length: 45 }, (_, i) => i + 1);
-      const picks = [];
-      while (picks.length < 6) {
-        const index = Math.floor(Math.random() * pool.length);
-        picks.push(pool.splice(index, 1)[0]);
-      }
-      return picks.sort((a, b) => a - b);
-    }
-
-    function renderNumbers(nums) {
-      numbersEl.innerHTML = "";
-      nums.forEach((num, idx) => {
-        const ball = document.createElement("div");
-        ball.className = "ball" + (idx % 2 === 1 ? " blue" : "");
-        ball.style.animationDelay = `${idx * 120}ms`;
-        ball.textContent = num;
-        numbersEl.appendChild(ball);
-      });
-    }
-
-    function addHistory(nums) {
-      const row = document.createElement("div");
-      row.className = "history-item";
-      const time = new Date().toLocaleTimeString("ko-KR", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit"
-      });
-      row.innerHTML = `
-        <span>${time}</span>
-        <div class="chip-row">
-          ${nums.map((n) => `<div class="chip">${n}</div>`).join("")}
-        </div>
-      `;
-      historyEl.prepend(row);
-    }
-
-    function doDraw() {
-      makeSeed();
-      const nums = drawNumbers();
-      renderNumbers(nums);
-      addHistory(nums);
-    }
-
-    document.getElementById("draw").addEventListener("click", doDraw);
-    document.getElementById("reroll").addEventListener("click", () => {
-      const nums = drawNumbers();
-      renderNumbers(nums);
-    });
-    document.getElementById("clear").addEventListener("click", () => {
-      historyEl.innerHTML = "";
-    });
-
-    doDraw();
-  </script>
-  <script>
-    const themeToggle = document.getElementById("theme-toggle");
-    const body = document.body;
-
-    const moonIcon = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-    </svg>
-    `;
-
-    const sunIcon = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="5"></circle>
-      <line x1="12" y1="1" x2="12" y2="3"></line>
-      <line x1="12" y1="21" x2="12" y2="23"></line>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-      <line x1="1" y1="12" x2="3" y2="12"></line>
-      <line x1="21" y1="12" x2="23" y2="12"></line>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-    </svg>
-    `;
-
-    function applyTheme(theme) {
-      if (theme === "light") {
-        body.classList.add("light-mode");
-        themeToggle.innerHTML = moonIcon;
-      } else {
-        body.classList.remove("light-mode");
-        themeToggle.innerHTML = sunIcon;
-      }
-    }
-
-    themeToggle.addEventListener("click", () => {
-      const isLight = body.classList.contains("light-mode");
-      if (isLight) {
-        localStorage.setItem("theme", "dark");
-        applyTheme("dark");
-      } else {
-        localStorage.setItem("theme", "light");
-        applyTheme("light");
-      }
-    });
-
-    const savedTheme = localStorage.getItem("theme") || "dark";
-    applyTheme(savedTheme);
-  </script>
-  <script>
-    (function() {
-      var d = document, s = d.createElement("script");
-      s.src = "https://product-builder-borkuxr1xg.disqus.com/embed.js";
-      s.setAttribute("data-timestamp", +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 로또 데이터 랩</div>
+      <div><a href="about.html">소개</a> · <a href="contact.html">문의</a> · <a href="privacy.html">개인정보처리방침</a> · <a href="terms.html">이용약관</a> · <a href="editorial-policy.html">편집 정책</a></div>
+    </div>
+  </footer>
 </body>
 </html>
