@@ -196,6 +196,69 @@ a:hover {
   color: #0c4a6e;
 }
 
+.lotto-numbers {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.lotto-ball {
+  aspect-ratio: 1;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #38bdf8);
+  border: 1px solid #bae6fd;
+  font-weight: 800;
+  color: #0c4a6e;
+}
+
+.lotto-controls {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.lotto-controls button {
+  border: none;
+  border-radius: 10px;
+  padding: 0.58rem 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--brand);
+  color: #ffffff;
+}
+
+.lotto-controls .secondary-btn {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.lotto-meta {
+  margin-top: 0.85rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.lotto-log {
+  margin-top: 0.9rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.lotto-log-item {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.55rem 0.7rem;
+  color: #1f2937;
+  background: #f8fafc;
+}
+
 footer {
   margin-top: 2rem;
   border-top: 1px solid var(--line);
@@ -233,5 +296,9 @@ footer {
 
   .hero {
     padding-top: 2rem;
+  }
+
+  .lotto-numbers {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
