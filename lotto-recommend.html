@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="1~45 범위에서 중복 없는 6개 로또 추천 번호를 생성하는 페이지" />
+  <meta name="description" content="1부터 45까지 범위에서 무작위로 6개의 숫자를 생성하며 확률과 통계적 무작위성을 시각적으로 보여주는 교육용 도구입니다." />
   <link rel="canonical" href="https://example.com/lotto-recommend.html" />
   <link rel="stylesheet" href="assets/styles.css" />
-  <title>로또 추천 번호 생성기 | 웹 프로덕트 랩</title>
+  <title>무작위 번호 생성기 | 데이터 인사이트 랩</title>
 </head>
 <body>
   <header class="site-header">
     <div class="container site-header-inner">
-      <a class="brand" href="index.html">웹 프로덕트 랩</a>
+      <a class="brand" href="index.html">데이터 인사이트 랩</a>
       <nav class="nav" aria-label="주요 메뉴">
         <a href="index.html">홈</a>
         <a href="site-map.html">사이트맵</a>
         <a href="my-brain.html">마이 브레인</a>
-        <a href="lotto-recommend.html">로또 추천</a>
+        <a href="lotto-recommend.html">번호 생성기</a>
         <a href="guide-odds.html">확률 가이드</a>
         <a href="guide-budget.html">예산 가이드</a>
         <a href="guide-myths.html">오해 바로잡기</a>
@@ -28,22 +28,27 @@
 
   <main class="container section">
     <article class="article">
-      <h1>로또 추천 번호 생성기</h1>
-      <p class="meta">기존 기능 유지용 페이지</p>
+      <h1>무작위 번호 생성기</h1>
+      <p class="meta">교육용 도구: 확률과 무작위성 이해</p>
+      <p class="notice">
+        <strong>주의:</strong> 이 도구는 통계적 무작위성(randomness)의 개념을 시각적으로 이해하기 위한 교육 목적으로 제작되었습니다.
+        여기서 생성된 번호는 통계적으로 어떤 이점도 갖지 않으며, 특정 결과를 보장하지 않습니다.
+        재미로만 사용하시고, 실제 금전적 결정에 사용하지 마십시오.
+      </p>
       <p>
-        버튼을 누르면 1~45 범위에서 중복 없는 6개 번호를 추천합니다. 결과는 오름차순으로 정렬되며,
-        생성 기록이 아래 로그에 누적됩니다.
+        아래 버튼을 누르면 1부터 45까지의 숫자 중에서 중복 없이 6개의 숫자를 무작위로 선택하여 보여줍니다.
+        '독립 시행'의 원리에 따라, 이전에 어떤 번호가 나왔는지는 다음에 나올 번호에 아무런 영향을 미치지 않습니다.
       </p>
 
       <div class="lotto-numbers" id="lotto-numbers" aria-live="polite"></div>
       <div class="lotto-controls">
-        <button type="button" id="draw-btn">추천번호 생성</button>
-        <button type="button" id="reroll-btn" class="secondary-btn">다시 생성</button>
+        <button type="button" id="draw-btn">새 번호 생성</button>
+        <button type="button" id="reroll-btn" class="secondary-btn">다시 생성 (로그 없음)</button>
         <button type="button" id="clear-log-btn" class="secondary-btn">로그 초기화</button>
       </div>
       <div class="lotto-meta">
-        <span>추천 범위: 1~45</span>
-        <span>선택 수: 6개</span>
+        <span>추출 범위: 1~45</span>
+        <span>선택 개수: 6개</span>
         <span>생성 시각: <strong id="draw-seed">-</strong></span>
       </div>
       <div class="lotto-log" id="lotto-log"></div>
@@ -52,8 +57,8 @@
 
   <footer>
     <div class="container footer-inner">
-      <div>© 2026 웹 프로덕트 랩</div>
-      <div><a href="about.html">소개</a> · <a href="site-map.html">사이트맵</a> · <a href="my-brain.html">마이 브레인</a> · <a href="lotto-recommend.html">로또 추천</a> · <a href="contact.html">문의</a> · <a href="privacy.html">개인정보처리방침</a> · <a href="terms.html">이용약관</a> · <a href="editorial-policy.html">편집 정책</a></div>
+      <div>© 2026 데이터 인사이트 랩</div>
+      <div><a href="about.html">소개</a> · <a href="site-map.html">사이트맵</a> · <a href="my-brain.html">마이 브레인</a> · <a href="lotto-recommend.html">번호 생성기</a> · <a href="contact.html">문의</a> · <a href="privacy.html">개인정보처리방침</a> · <a href="terms.html">이용약관</a> · <a href="editorial-policy.html">편집 정책</a></div>
     </div>
   </footer>
 

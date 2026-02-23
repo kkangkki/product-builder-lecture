@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="마이 브레인 - 12문항으로 확인하는 디지털 브레인 타입 테스트" />
+  <meta name="description" content="12개 질문으로 나의 디지털 사용 습관과 성향을 데이터 기반으로 분석하는 '마이 브레인' 심리 테스트입니다." />
   <link rel="canonical" href="https://example.com/my-brain.html" />
   <link rel="stylesheet" href="assets/styles.css" />
-  <title>마이 브레인 | 디지털 브레인 타입 테스트</title>
+  <title>마이 브레인 | 데이터로 나를 진단하는 성향 테스트</title>
   <style>
     .brain-hero {
       padding: 2.6rem 0 1.5rem;
@@ -228,12 +228,12 @@
 <body>
   <header class="site-header">
     <div class="container site-header-inner">
-      <a class="brand" href="index.html">웹 프로덕트 랩</a>
+      <a class="brand" href="index.html">데이터 인사이트 랩</a>
       <nav class="nav" aria-label="주요 메뉴">
         <a href="index.html">홈</a>
         <a href="site-map.html">사이트맵</a>
         <a href="my-brain.html">마이 브레인</a>
-        <a href="lotto-recommend.html">로또 추천</a>
+        <a href="lotto-recommend.html">번호 생성기</a>
         <a href="guide-odds.html">확률 가이드</a>
         <a href="guide-budget.html">예산 가이드</a>
         <a href="guide-myths.html">오해 바로잡기</a>
@@ -245,16 +245,16 @@
 
   <main class="container">
     <section class="brain-hero">
-      <h1>마이 브레인: 디지털 생활이 만든 나의 뇌 유형</h1>
+      <h1>마이 브레인: 데이터로 진단하는 나의 성향</h1>
       <p>
-        기획서의 Product 02를 기반으로 만든 1차 MVP입니다. 12문항 퀵 테스트로 8가지 디지털 브레인 타입 중
-        현재 패턴을 분류하고, 수면·집중·스트레스 영향도를 간단 리포트로 보여줍니다.
+        '마이 브레인'은 12개의 질문에 답하는 것만으로, 당신의 디지털 생활 패턴과 성향을 8가지 유형으로 분석해주는 데이터 기반 심리 테스트입니다.
+        이를 통해 막연하게 느꼈던 자신의 성향을 명확히 인지하고, 수면·집중·스트레스에 미치는 영향을 객관적인 데이터로 확인해 보세요.
       </p>
       <div class="badges" aria-label="마이 브레인 핵심 가치">
-        <span class="badge">12문항 3분 테스트</span>
-        <span class="badge">8가지 타입 분류</span>
-        <span class="badge">건강 영향도 리포트</span>
-        <span class="badge">친구 궁합(베타)</span>
+        <span class="badge">12문항 데이터 분석</span>
+        <span class="badge">8가지 성향 타입 분류</span>
+        <span class="badge">생활 패턴 영향도 리포트</span>
+        <span class="badge">친구와 궁합 보기(베타)</span>
       </div>
     </section>
 
@@ -263,8 +263,8 @@
         <section id="intro-panel">
           <h2>테스트 시작</h2>
           <p>
-            설문은 순차적으로 진행됩니다. 응답 데이터는 브라우저에서만 계산되며 서버로 전송되지 않습니다.
-            결과는 리셋 전까지 현재 페이지에서 확인할 수 있습니다.
+            응답 데이터는 더 정확한 분석을 위해 각 문항에 부여된 가중치를 기반으로 계산됩니다.
+            모든 데이터는 브라우저 내에서만 처리되며, 서버로 전송되거나 저장되지 않아 개인정보가 안전하게 보호됩니다.
           </p>
           <div class="brain-actions">
             <button type="button" id="start-test-btn">테스트 시작하기</button>
@@ -279,7 +279,7 @@
         </section>
 
         <section id="result-panel" class="brain-hidden" aria-live="polite">
-          <h2>분석 결과</h2>
+          <h2>데이터 분석 결과</h2>
           <div class="result-type">
             <h3 id="type-title">-</h3>
             <p id="type-description">-</p>
@@ -309,12 +309,12 @@
       </article>
 
       <aside class="brain-panel">
-        <h3>8가지 디지털 브레인 타입</h3>
-        <p>기획서의 유형 구조를 기준으로 1차 분류명을 적용했습니다.</p>
+        <h3>8가지 성향 타입</h3>
+        <p>디지털 행동 패턴 데이터를 기반으로 8가지 주요 성향을 분류했습니다.</p>
         <div class="type-list" id="type-list"></div>
 
-        <h3 style="margin-top:1rem">친구 궁합 보기 (베타)</h3>
-        <p>내 결과 유형과 친구 유형을 선택하면 궁합 코멘트를 보여줍니다.</p>
+        <h3 style="margin-top:1rem">친구와 성향 궁합 보기 (베타)</h3>
+        <p>나의 분석 결과와 친구의 성향 타입을 선택하면 서로의 상호작용 패턴을 간단한 코멘트로 보여줍니다.</p>
         <div class="compat-row">
           <select id="my-type-select" aria-label="내 유형 선택"></select>
           <select id="friend-type-select" aria-label="친구 유형 선택"></select>
@@ -327,8 +327,8 @@
 
   <footer>
     <div class="container footer-inner">
-      <div>© 2026 웹 프로덕트 랩</div>
-      <div><a href="about.html">소개</a> · <a href="site-map.html">사이트맵</a> · <a href="my-brain.html">마이 브레인</a> · <a href="lotto-recommend.html">로또 추천</a> · <a href="contact.html">문의</a> · <a href="privacy.html">개인정보처리방침</a> · <a href="terms.html">이용약관</a> · <a href="editorial-policy.html">편집 정책</a></div>
+      <div>© 2026 데이터 인사이트 랩</div>
+      <div><a href="about.html">소개</a> · <a href="site-map.html">사이트맵</a> · <a href="my-brain.html">마이 브레인</a> · <a href="lotto-recommend.html">번호 생성기</a> · <a href="contact.html">문의</a> · <a href="privacy.html">개인정보처리방침</a> · <a href="terms.html">이용약관</a> · <a href="editorial-policy.html">편집 정책</a></div>
     </div>
   </footer>
 
