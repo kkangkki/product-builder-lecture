@@ -36,4 +36,16 @@
     <loc>https://example.com/editorial-policy.html</loc>
     <lastmod>2026-02-17</lastmod>
   </url>
+  <url>
+    <loc>https://example.com/my-brain.html</loc>
+    <lastmod>2026-02-23</lastmod>
+  </url>
+  <url>
+    <loc>https://example.com/site-map.html</loc>
+    <lastmod>2026-02-23</lastmod>
+  </url>
+  <url>
+    <loc>https://example.com/lotto-recommend.html</loc>
+    <lastmod>2026-02-23</lastmod>
+  </url>
 </urlset>

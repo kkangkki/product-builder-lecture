@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="마이 브레인 - 12문항으로 확인하는 디지털 브레인 타입 테스트" />
+  <link rel="canonical" href="https://example.com/my-brain.html" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <title>마이 브레인 | 디지털 브레인 타입 테스트</title>
+  <style>
+    .brain-hero {
+      padding: 2.6rem 0 1.5rem;
+    }
+
+    .brain-hero h1 {
+      margin: 0;
+      font-size: clamp(1.65rem, 2.2vw + 1rem, 2.5rem);
+      line-height: 1.28;
+    }
+
+    .brain-hero p {
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 820px;
+    }
+
+    .brain-layout {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 1rem;
+      padding-bottom: 2rem;
+    }
+
+    .brain-panel {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #ffffff;
+      box-shadow: 0 8px 26px rgba(2, 8, 23, 0.06);
+      padding: 1.25rem;
+    }
+
+    .brain-panel h2,
+    .brain-panel h3 {
+      margin-top: 0;
+    }
+
+    .brain-panel p {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .brain-actions {
+      margin-top: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .brain-actions button,
+    .brain-actions .brain-link-btn {
+      border: none;
+      border-radius: 10px;
+      padding: 0.62rem 0.94rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: #6d28d9;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.92rem;
+    }
+
+    .brain-actions .secondary {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .progress {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: #ede9fe;
+      overflow: hidden;
+      margin-top: 0.8rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #7c3aed, #22c55e);
+      transition: width 0.22s ease;
+    }
+
+    .q-meta {
+      margin-top: 0.45rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .question {
+      margin: 1rem 0 0.75rem;
+      font-size: 1.2rem;
+      line-height: 1.4;
+      color: #111827;
+    }
+
+    .answers {
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .answer-btn {
+      border: 1px solid #ddd6fe;
+      background: #faf5ff;
+      color: #3b0764;
+      border-radius: 12px;
+      text-align: left;
+      padding: 0.76rem 0.88rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .answer-btn:hover {
+      background: #ede9fe;
+    }
+
+    .result-type {
+      border: 1px solid #ddd6fe;
+      border-radius: 14px;
+      background: linear-gradient(160deg, #faf5ff 0%, #eef2ff 100%);
+      padding: 1rem;
+      margin-top: 0.85rem;
+    }
+
+    .result-type h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1.35rem;
+    }
+
+    .health-grid {
+      display: grid;
+      gap: 0.6rem;
+      margin-top: 0.95rem;
+    }
+
+    .health-item {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .health-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      color: #374151;
+    }
+
+    .health-bar {
+      height: 10px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      overflow: hidden;
+    }
+
+    .health-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #f59e0b, #ef4444);
+    }
+
+    .compat-row {
+      display: grid;
+      gap: 0.55rem;
+      margin-top: 0.75rem;
+    }
+
+    .compat-row select {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.55rem 0.66rem;
+      font-size: 0.95rem;
+    }
+
+    .compat-row button {
+      border: none;
+      border-radius: 10px;
+      padding: 0.58rem 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: #6d28d9;
+      color: #ffffff;
+    }
+
+    .compat-output {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #f8fafc;
+      padding: 0.76rem 0.85rem;
+      color: #1f2937;
+      line-height: 1.55;
+      min-height: 68px;
+    }
+
+    .brain-hidden {
+      display: none;
+    }
+
+    .type-list {
+      display: grid;
+      gap: 0.55rem;
+      margin-top: 0.75rem;
+    }
+
+    .type-chip {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 0.5rem 0.62rem;
+      font-size: 0.9rem;
+      background: #ffffff;
+    }
+
+    @media (max-width: 920px) {
+      .brain-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a class="brand" href="index.html">웹 프로덕트 랩</a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="index.html">홈</a>
+        <a href="site-map.html">사이트맵</a>
+        <a href="my-brain.html">마이 브레인</a>
+        <a href="lotto-recommend.html">로또 추천</a>
+        <a href="guide-odds.html">확률 가이드</a>
+        <a href="guide-budget.html">예산 가이드</a>
+        <a href="guide-myths.html">오해 바로잡기</a>
+        <a href="about.html">소개</a>
+        <a href="contact.html">문의</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="brain-hero">
+      <h1>마이 브레인: 디지털 생활이 만든 나의 뇌 유형</h1>
+      <p>
+        기획서의 Product 02를 기반으로 만든 1차 MVP입니다. 12문항 퀵 테스트로 8가지 디지털 브레인 타입 중
+        현재 패턴을 분류하고, 수면·집중·스트레스 영향도를 간단 리포트로 보여줍니다.
+      </p>
+      <div class="badges" aria-label="마이 브레인 핵심 가치">
+        <span class="badge">12문항 3분 테스트</span>
+        <span class="badge">8가지 타입 분류</span>
+        <span class="badge">건강 영향도 리포트</span>
+        <span class="badge">친구 궁합(베타)</span>
+      </div>
+    </section>
+
+    <section class="brain-layout">
+      <article class="brain-panel">
+        <section id="intro-panel">
+          <h2>테스트 시작</h2>
+          <p>
+            설문은 순차적으로 진행됩니다. 응답 데이터는 브라우저에서만 계산되며 서버로 전송되지 않습니다.
+            결과는 리셋 전까지 현재 페이지에서 확인할 수 있습니다.
+          </p>
+          <div class="brain-actions">
+            <button type="button" id="start-test-btn">테스트 시작하기</button>
+          </div>
+        </section>
+
+        <section id="question-panel" class="brain-hidden" aria-live="polite">
+          <div class="q-meta" id="q-meta">문항 1 / 12</div>
+          <div class="progress" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
+          <h2 class="question" id="question-text"></h2>
+          <div class="answers" id="answers-wrap"></div>
+        </section>
+
+        <section id="result-panel" class="brain-hidden" aria-live="polite">
+          <h2>분석 결과</h2>
+          <div class="result-type">
+            <h3 id="type-title">-</h3>
+            <p id="type-description">-</p>
+            <p><strong>신뢰도:</strong> <span id="confidence-text">-</span></p>
+          </div>
+
+          <div class="health-grid">
+            <div class="health-item">
+              <div class="health-label"><span>수면 영향도</span><span id="sleep-num">0%</span></div>
+              <div class="health-bar"><div class="health-fill" id="sleep-bar"></div></div>
+            </div>
+            <div class="health-item">
+              <div class="health-label"><span>집중력 저하 위험도</span><span id="focus-num">0%</span></div>
+              <div class="health-bar"><div class="health-fill" id="focus-bar"></div></div>
+            </div>
+            <div class="health-item">
+              <div class="health-label"><span>스트레스 체감도</span><span id="stress-num">0%</span></div>
+              <div class="health-bar"><div class="health-fill" id="stress-bar"></div></div>
+            </div>
+          </div>
+
+          <div class="brain-actions">
+            <button type="button" id="copy-result-btn">결과 텍스트 복사</button>
+            <button type="button" id="restart-btn" class="secondary">다시 테스트</button>
+          </div>
+        </section>
+      </article>
+
+      <aside class="brain-panel">
+        <h3>8가지 디지털 브레인 타입</h3>
+        <p>기획서의 유형 구조를 기준으로 1차 분류명을 적용했습니다.</p>
+        <div class="type-list" id="type-list"></div>
+
+        <h3 style="margin-top:1rem">친구 궁합 보기 (베타)</h3>
+        <p>내 결과 유형과 친구 유형을 선택하면 궁합 코멘트를 보여줍니다.</p>
+        <div class="compat-row">
+          <select id="my-type-select" aria-label="내 유형 선택"></select>
+          <select id="friend-type-select" aria-label="친구 유형 선택"></select>
+          <button type="button" id="compat-btn">궁합 확인</button>
+          <div class="compat-output" id="compat-output">먼저 테스트를 진행하거나 유형을 선택해 주세요.</div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 웹 프로덕트 랩</div>
+      <div><a href="about.html">소개</a> · <a href="site-map.html">사이트맵</a> · <a href="my-brain.html">마이 브레인</a> · <a href="lotto-recommend.html">로또 추천</a> · <a href="contact.html">문의</a> · <a href="privacy.html">개인정보처리방침</a> · <a href="terms.html">이용약관</a> · <a href="editorial-policy.html">편집 정책</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const brainTypes = [
+      { id: "dopa", emoji: "🎮", name: "도파민 헌터", desc: "자극 반응 속도가 빠르고 SNS·짧은 콘텐츠 소비 비중이 높은 타입" },
+      { id: "minimal", emoji: "🧘", name: "디지털 미니멀리스트", desc: "알림과 화면 시간을 의도적으로 줄이며 사용 목적이 분명한 타입" },
+      { id: "info", emoji: "📚", name: "정보 중독자", desc: "뉴스·아티클 탐색 비중이 높고 탐구형 소비 성향이 강한 타입" },
+      { id: "social", emoji: "💬", name: "소셜 커넥터", desc: "메신저·커뮤니티 활동 중심으로 연결성과 반응성이 높은 타입" },
+      { id: "content", emoji: "🎬", name: "콘텐츠 다이버", desc: "영상·오디오 몰입 시간이 길고 깊이 소비하는 타입" },
+      { id: "shopper", emoji: "🛒", name: "디지털 쇼퍼", desc: "쇼핑 탐색과 가격 비교 활동이 습관화된 타입" },
+      { id: "work", emoji: "💼", name: "워크어홀릭", desc: "업무 앱 의존도가 높고 업무-개인 경계가 흐려지기 쉬운 타입" },
+      { id: "night", emoji: "🌙", name: "나이트아울", desc: "심야 사용 비중이 높아 수면 리듬에 영향을 받기 쉬운 타입" }
+    ];
+
+    const questions = [
+      {
+        q: "주말 아침 눈 뜨자마자 가장 먼저 하는 행동은?",
+        a: [
+          { t: "📱 알림/메신저 확인", w: { social: 2, dopa: 1, sleep: 8, stress: 6 } },
+          { t: "📰 뉴스/아티클 탐색", w: { info: 2, focus: 4, stress: 5 } },
+          { t: "☀️ 폰 없이 루틴부터", w: { minimal: 2, sleep: -6, stress: -6 } },
+          { t: "🎬 침대에서 영상 시청", w: { content: 2, night: 1, sleep: 9 } }
+        ]
+      },
+      {
+        q: "알림이 연속으로 올 때 내 반응은?",
+        a: [
+          { t: "⚡ 거의 즉시 확인", w: { dopa: 2, social: 1, stress: 8 } },
+          { t: "⏰ 몰아서 확인", w: { minimal: 2, stress: -5 } },
+          { t: "💼 업무 알림만 빠르게", w: { work: 2, stress: 5 } },
+          { t: "🔕 대부분 무음", w: { minimal: 1, info: 1, stress: -4 } }
+        ]
+      },
+      {
+        q: "주 사용 앱 카테고리 비중이 가장 큰 것은?",
+        a: [
+          { t: "💬 메신저/SNS", w: { social: 2, dopa: 1 } },
+          { t: "📚 리서치/뉴스", w: { info: 2 } },
+          { t: "🛍️ 쇼핑/비교", w: { shopper: 2 } },
+          { t: "🧰 업무/생산성", w: { work: 2, focus: 4 } }
+        ]
+      },
+      {
+        q: "잠들기 전 마지막 30분에 가장 많이 하는 일은?",
+        a: [
+          { t: "📱 짧은 영상 스크롤", w: { dopa: 2, night: 1, sleep: 10 } },
+          { t: "🎧 팟캐스트/롱폼 콘텐츠", w: { content: 2, night: 1, sleep: 7 } },
+          { t: "📖 전자책/글 읽기", w: { info: 1, minimal: 1, sleep: 3 } },
+          { t: "🛏️ 기기 끄고 바로 취침", w: { minimal: 2, sleep: -8 } }
+        ]
+      },
+      {
+        q: "하루 중 앱을 가장 많이 바꾸는 상황은?",
+        a: [
+          { t: "심심할 때 계속 전환", w: { dopa: 2, stress: 6 } },
+          { t: "정보 확인 중 탐색 확장", w: { info: 2 } },
+          { t: "업무 멀티태스킹", w: { work: 2, stress: 4, focus: 6 } },
+          { t: "거의 한 앱만 깊게 사용", w: { content: 2, focus: -3 } }
+        ]
+      },
+      {
+        q: "콘텐츠 소비 패턴에 가장 가까운 것은?",
+        a: [
+          { t: "짧고 강한 콘텐츠 반복", w: { dopa: 2, content: 1, focus: 6 } },
+          { t: "긴 영상/오디오 몰입", w: { content: 2, night: 1 } },
+          { t: "텍스트 중심 깊은 탐색", w: { info: 2, focus: -4 } },
+          { t: "필요할 때만 선택 소비", w: { minimal: 2, stress: -4 } }
+        ]
+      },
+      {
+        q: "온라인 쇼핑 습관은?",
+        a: [
+          { t: "하루에도 여러 번 탐색", w: { shopper: 2, dopa: 1, stress: 4 } },
+          { t: "장바구니 쌓고 비교", w: { shopper: 2, info: 1 } },
+          { t: "필요할 때만 즉시 구매", w: { minimal: 1, shopper: 1 } },
+          { t: "거의 쇼핑 앱을 안 씀", w: { minimal: 2 } }
+        ]
+      },
+      {
+        q: "업무 시간이 끝난 뒤에도 업무 앱을 확인하나요?",
+        a: [
+          { t: "거의 매일 확인", w: { work: 2, stress: 8, sleep: 4 } },
+          { t: "중요할 때만", w: { work: 1, stress: 3 } },
+          { t: "업무 종료 후 차단", w: { minimal: 2, work: -1, stress: -6 } },
+          { t: "업무 앱보다 커뮤니티", w: { social: 2, work: -1 } }
+        ]
+      },
+      {
+        q: "스크린타임이 늘어났을 때 내 느낌은?",
+        a: [
+          { t: "피곤하지만 멈추기 어려움", w: { dopa: 2, night: 1, stress: 7 } },
+          { t: "정보는 많아졌지만 산만함", w: { info: 2, focus: 6 } },
+          { t: "대화는 많아졌지만 소진됨", w: { social: 2, stress: 6 } },
+          { t: "즉시 줄이려 조정함", w: { minimal: 2, stress: -5 } }
+        ]
+      },
+      {
+        q: "친구가 나를 디지털 습관으로 묘사한다면?",
+        a: [
+          { t: "'답장 제일 빠른 사람'", w: { social: 2 } },
+          { t: "'일 얘기 계속하는 사람'", w: { work: 2, stress: 3 } },
+          { t: "'새 정보 맨날 공유하는 사람'", w: { info: 2 } },
+          { t: "'밤에 제일 활발한 사람'", w: { night: 2, sleep: 8 } }
+        ]
+      },
+      {
+        q: "하루 평균 개인 스크린 사용 시간은?",
+        a: [
+          { t: "3시간 이하", w: { minimal: 2, sleep: -4, stress: -3 } },
+          { t: "4~6시간", w: { content: 1, info: 1 } },
+          { t: "7~9시간", w: { dopa: 1, social: 1, stress: 4, sleep: 5 } },
+          { t: "10시간 이상", w: { night: 2, work: 1, sleep: 10, stress: 8 } }
+        ]
+      },
+      {
+        q: "디지털 디톡스 하루를 시도한다면 가장 어려운 것은?",
+        a: [
+          { t: "SNS/숏폼 끊기", w: { dopa: 2, social: 1 } },
+          { t: "뉴스/정보 확인 중단", w: { info: 2 } },
+          { t: "업무/메신저 분리", w: { work: 2, stress: 4 } },
+          { t: "밤 늦게 보는 습관 끊기", w: { night: 2, sleep: 8 } }
+        ]
+      }
+    ];
+
+    const compatMap = {
+      "dopa-minimal": "충돌 궁합: 자극 vs 절제 성향이 강해 루틴 합의가 필요합니다.",
+      "social-content": "호감 궁합: 함께 콘텐츠를 소비하고 반응을 나누는 흐름이 자연스럽습니다.",
+      "work-night": "주의 궁합: 늦은 업무/야행성 패턴이 겹쳐 피로 누적 위험이 큽니다.",
+      "info-shopper": "균형 궁합: 탐색력과 실행력이 결합되어 의사결정 효율이 좋습니다.",
+      "minimal-night": "리듬 충돌: 수면/사용 시간대가 달라 조율 포인트가 많습니다."
+    };
+
+    const state = {
+      idx: 0,
+      typeScores: {
+        dopa: 0,
+        minimal: 0,
+        info: 0,
+        social: 0,
+        content: 0,
+        shopper: 0,
+        work: 0,
+        night: 0
+      },
+      health: { sleep: 25, focus: 25, stress: 25 },
+      currentType: null
+    };
+
+    const el = {
+      intro: document.getElementById("intro-panel"),
+      question: document.getElementById("question-panel"),
+      result: document.getElementById("result-panel"),
+      qMeta: document.getElementById("q-meta"),
+      qText: document.getElementById("question-text"),
+      answers: document.getElementById("answers-wrap"),
+      progress: document.getElementById("progress-fill"),
+      startBtn: document.getElementById("start-test-btn"),
+      restartBtn: document.getElementById("restart-btn"),
+      copyBtn: document.getElementById("copy-result-btn"),
+      typeTitle: document.getElementById("type-title"),
+      typeDesc: document.getElementById("type-description"),
+      confidence: document.getElementById("confidence-text"),
+      sleepNum: document.getElementById("sleep-num"),
+      focusNum: document.getElementById("focus-num"),
+      stressNum: document.getElementById("stress-num"),
+      sleepBar: document.getElementById("sleep-bar"),
+      focusBar: document.getElementById("focus-bar"),
+      stressBar: document.getElementById("stress-bar"),
+      typeList: document.getElementById("type-list"),
+      mySelect: document.getElementById("my-type-select"),
+      friendSelect: document.getElementById("friend-type-select"),
+      compatBtn: document.getElementById("compat-btn"),
+      compatOutput: document.getElementById("compat-output")
+    };
+
+    function clamp(n) {
+      return Math.max(0, Math.min(100, n));
+    }
+
+    function keyFor(a, b) {
+      return [a, b].sort().join("-");
+    }
+
+    function renderTypeListAndSelects() {
+      el.typeList.innerHTML = "";
+      el.mySelect.innerHTML = "";
+      el.friendSelect.innerHTML = "";
+
+      const placeholder1 = document.createElement("option");
+      placeholder1.value = "";
+      placeholder1.textContent = "내 유형 선택";
+      el.mySelect.appendChild(placeholder1);
+
+      const placeholder2 = document.createElement("option");
+      placeholder2.value = "";
+      placeholder2.textContent = "친구 유형 선택";
+      el.friendSelect.appendChild(placeholder2);
+
+      brainTypes.forEach((t) => {
+        const row = document.createElement("div");
+        row.className = "type-chip";
+        row.textContent = t.emoji + " " + t.name;
+        el.typeList.appendChild(row);
+
+        const opt1 = document.createElement("option");
+        opt1.value = t.id;
+        opt1.textContent = t.emoji + " " + t.name;
+        el.mySelect.appendChild(opt1);
+
+        const opt2 = document.createElement("option");
+        opt2.value = t.id;
+        opt2.textContent = t.emoji + " " + t.name;
+        el.friendSelect.appendChild(opt2);
+      });
+    }
+
+    function resetState() {
+      state.idx = 0;
+      state.currentType = null;
+      Object.keys(state.typeScores).forEach((k) => {
+        state.typeScores[k] = 0;
+      });
+      state.health = { sleep: 25, focus: 25, stress: 25 };
+    }
+
+    function showQuestion() {
+      const current = questions[state.idx];
+      el.qMeta.textContent = "문항 " + (state.idx + 1) + " / " + questions.length;
+      el.qText.textContent = current.q;
+      el.progress.style.width = ((state.idx + 1) / questions.length) * 100 + "%";
+      el.answers.innerHTML = "";
+
+      current.a.forEach((choice) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "answer-btn";
+        btn.textContent = choice.t;
+        btn.addEventListener("click", () => onAnswer(choice.w));
+        el.answers.appendChild(btn);
+      });
+    }
+
+    function onAnswer(weights) {
+      Object.keys(weights).forEach((k) => {
+        if (Object.prototype.hasOwnProperty.call(state.typeScores, k)) {
+          state.typeScores[k] += weights[k];
+        } else if (k === "sleep" || k === "focus" || k === "stress") {
+          state.health[k] += weights[k];
+        }
+      });
+
+      state.idx += 1;
+      if (state.idx >= questions.length) {
+        showResult();
+      } else {
+        showQuestion();
+      }
+    }
+
+    function getResultType() {
+      const entries = Object.entries(state.typeScores);
+      entries.sort((a, b) => b[1] - a[1]);
+      const first = entries[0];
+      const second = entries[1] || ["minimal", 0];
+      const type = brainTypes.find((t) => t.id === first[0]);
+      const confidence = Math.round((first[1] / Math.max(1, first[1] + second[1])) * 100);
+      return { type, confidence };
+    }
+
+    function renderHealth() {
+      const sleep = clamp(Math.round(state.health.sleep));
+      const focus = clamp(Math.round(state.health.focus));
+      const stress = clamp(Math.round(state.health.stress));
+
+      el.sleepNum.textContent = sleep + "%";
+      el.focusNum.textContent = focus + "%";
+      el.stressNum.textContent = stress + "%";
+      el.sleepBar.style.width = sleep + "%";
+      el.focusBar.style.width = focus + "%";
+      el.stressBar.style.width = stress + "%";
+    }
+
+    function showResult() {
+      const result = getResultType();
+      state.currentType = result.type;
+
+      el.intro.classList.add("brain-hidden");
+      el.question.classList.add("brain-hidden");
+      el.result.classList.remove("brain-hidden");
+
+      el.typeTitle.textContent = result.type.emoji + " " + result.type.name;
+      el.typeDesc.textContent = result.type.desc;
+      el.confidence.textContent = result.confidence + "%";
+      renderHealth();
+
+      el.mySelect.value = result.type.id;
+      el.compatOutput.textContent = "내 유형이 자동 선택되었습니다. 친구 유형을 선택해 궁합을 확인해 보세요.";
+    }
+
+    function startTest() {
+      resetState();
+      el.intro.classList.add("brain-hidden");
+      el.result.classList.add("brain-hidden");
+      el.question.classList.remove("brain-hidden");
+      showQuestion();
+    }
+
+    function showCompatibility() {
+      const a = el.mySelect.value;
+      const b = el.friendSelect.value;
+
+      if (!a || !b) {
+        el.compatOutput.textContent = "내 유형과 친구 유형을 모두 선택해 주세요.";
+        return;
+      }
+
+      if (a === b) {
+        const t = brainTypes.find((x) => x.id === a);
+        el.compatOutput.textContent = "같은 유형 궁합: " + t.name + "끼리는 생활 리듬이 비슷해 공감대가 높습니다.";
+        return;
+      }
+
+      const key = keyFor(a, b);
+      const msg = compatMap[key] || "일반 궁합: 서로 다른 강점이 있어 협업 시 균형을 만들기 좋습니다.";
+      el.compatOutput.textContent = msg;
+    }
+
+    async function copyResultText() {
+      if (!state.currentType) return;
+      const text = "[마이 브레인 결과] " + state.currentType.emoji + " " + state.currentType.name +
+        " | 신뢰도 " + el.confidence.textContent +
+        " | 수면 " + el.sleepNum.textContent +
+        " · 집중 " + el.focusNum.textContent +
+        " · 스트레스 " + el.stressNum.textContent;
+
+      try {
+        await navigator.clipboard.writeText(text);
+        el.compatOutput.textContent = "결과 텍스트를 복사했습니다. 원하는 채널에 붙여넣어 공유하세요.";
+      } catch (err) {
+        el.compatOutput.textContent = "브라우저 정책으로 자동 복사에 실패했습니다. 직접 복사해 주세요.";
+      }
+    }
+
+    renderTypeListAndSelects();
+    el.startBtn.addEventListener("click", startTest);
+    el.restartBtn.addEventListener("click", startTest);
+    el.compatBtn.addEventListener("click", showCompatibility);
+    el.copyBtn.addEventListener("click", copyResultText);
+  </script>
+</body>
+</html>

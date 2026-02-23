@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="웹 프로덕트 랩 사이트 구조를 한눈에 보는 사이트맵" />
+  <link rel="canonical" href="https://example.com/site-map.html" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <title>사이트맵 | 웹 프로덕트 랩</title>
+  <style>
+    .map-hero {
+      padding: 2.8rem 0 1.6rem;
+      text-align: left;
+    }
+
+    .map-hero h1 {
+      margin: 0;
+      font-size: clamp(1.7rem, 2.2vw + 0.9rem, 2.6rem);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    .map-hero p {
+      margin: 0.85rem 0 0;
+      max-width: 760px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .map-wrap {
+      display: grid;
+      gap: 1rem;
+      padding-bottom: 2.2rem;
+    }
+
+    .map-group {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      overflow: hidden;
+    }
+
+    .map-group-head {
+      padding: 1rem 1.1rem;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(90deg, #f8fafc 0%, #eef2ff 100%);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.7rem;
+    }
+
+    .map-group-head h2 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .map-group-head span {
+      font-size: 0.8rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .map-links {
+      display: grid;
+      gap: 0.65rem;
+      padding: 1rem 1.1rem 1.15rem;
+    }
+
+    .map-link {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.8rem 0.9rem;
+      background: #ffffff;
+      display: grid;
+      gap: 0.25rem;
+      transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .map-link:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+      border-color: #c7d2fe;
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.12);
+    }
+
+    .map-link strong {
+      color: #0f172a;
+      font-size: 0.98rem;
+    }
+
+    .map-link small {
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 0.85rem;
+    }
+
+    .map-note {
+      border-left: 4px solid #6366f1;
+      background: #eef2ff;
+      border-radius: 10px;
+      padding: 0.75rem 0.85rem;
+      color: #3730a3;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    @media (min-width: 860px) {
+      .map-wrap {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a class="brand" href="index.html">웹 프로덕트 랩</a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="index.html">홈</a>
+        <a href="site-map.html">사이트맵</a>
+        <a href="my-brain.html">마이 브레인</a>
+        <a href="lotto-recommend.html">로또 추천</a>
+        <a href="guide-odds.html">확률 가이드</a>
+        <a href="guide-budget.html">예산 가이드</a>
+        <a href="guide-myths.html">오해 바로잡기</a>
+        <a href="about.html">소개</a>
+        <a href="contact.html">문의</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="map-hero">
+      <h1>사이트맵</h1>
+      <p>
+        현재 사이트 구조를 제품, 콘텐츠, 운영 정책으로 단순화했습니다.
+        우선은 <strong>마이 브레인</strong>에 집중하고 나머지 영역은 확장 가능한 구조로 유지합니다.
+      </p>
+    </section>
+
+    <section class="map-wrap" aria-label="사이트 구조">
+      <article class="map-group">
+        <div class="map-group-head">
+          <h2>Product</h2>
+          <span>핵심 기능</span>
+        </div>
+        <div class="map-links">
+          <a class="map-link" href="index.html">
+            <strong>홈</strong>
+            <small>프로젝트 소개와 현재 우선순위 확인</small>
+          </a>
+          <a class="map-link" href="my-brain.html">
+            <strong>마이 브레인</strong>
+            <small>12문항 테스트, 8타입 결과, 건강 영향도, 궁합 베타</small>
+          </a>
+          <a class="map-link" href="lotto-recommend.html">
+            <strong>로또 추천 번호 생성기</strong>
+            <small>중복 없는 6개 번호 생성과 기록 로그 확인</small>
+          </a>
+        </div>
+      </article>
+
+      <article class="map-group">
+        <div class="map-group-head">
+          <h2>Insights</h2>
+          <span>가이드/블로그 기반</span>
+        </div>
+        <div class="map-links">
+          <a class="map-link" href="guide-odds.html">
+            <strong>확률 가이드</strong>
+            <small>확률/기대값 해석의 기본 프레임</small>
+          </a>
+          <a class="map-link" href="guide-budget.html">
+            <strong>예산 가이드</strong>
+            <small>지속 가능한 사용 예산 원칙</small>
+          </a>
+          <a class="map-link" href="guide-myths.html">
+            <strong>오해 바로잡기</strong>
+            <small>자주 반복되는 통계 해석 오류 정리</small>
+          </a>
+        </div>
+      </article>
+
+      <article class="map-group">
+        <div class="map-group-head">
+          <h2>About</h2>
+          <span>운영 정보</span>
+        </div>
+        <div class="map-links">
+          <a class="map-link" href="about.html">
+            <strong>소개</strong>
+            <small>사이트 목적, 운영 원칙, 콘텐츠 방향</small>
+          </a>
+          <a class="map-link" href="contact.html">
+            <strong>문의</strong>
+            <small>오류 제보, 협업/제휴 관련 연락 채널</small>
+          </a>
+        </div>
+      </article>
+
+      <article class="map-group">
+        <div class="map-group-head">
+          <h2>Policy</h2>
+          <span>신뢰/규정</span>
+        </div>
+        <div class="map-links">
+          <a class="map-link" href="privacy.html">
+            <strong>개인정보처리방침</strong>
+            <small>개인정보 수집/처리 기준</small>
+          </a>
+          <a class="map-link" href="terms.html">
+            <strong>이용약관</strong>
+            <small>서비스 이용 조건</small>
+          </a>
+          <a class="map-link" href="editorial-policy.html">
+            <strong>편집 정책</strong>
+            <small>콘텐츠 품질과 업데이트 원칙</small>
+          </a>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <p class="map-note">현재 단계에서는 기획서 기반 추가 프로덕트 개발 없이, 마이 브레인과 콘텐츠 구조 정리에 집중합니다.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 웹 프로덕트 랩</div>
+      <div><a href="about.html">소개</a> · <a href="site-map.html">사이트맵</a> · <a href="my-brain.html">마이 브레인</a> · <a href="lotto-recommend.html">로또 추천</a> · <a href="contact.html">문의</a> · <a href="privacy.html">개인정보처리방침</a> · <a href="terms.html">이용약관</a> · <a href="editorial-policy.html">편집 정책</a></div>
+    </div>
+  </footer>
+</body>
+</html>
